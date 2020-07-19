@@ -21,6 +21,9 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- 配置静态资源文件 -->
+    <mvc:resources mapping="/**" location="/"/>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
