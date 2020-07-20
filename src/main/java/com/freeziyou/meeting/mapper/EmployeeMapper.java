@@ -10,4 +10,6 @@ import com.freeziyou.meeting.model.Employee;
 public interface EmployeeMapper {
 
     Employee loadEmpByUsername(String username);
+
+    Integer doReg(Employee employee);
 }

@@ -18,58 +18,67 @@
         <div class="content-nav">
             人员管理 > 员工注册
         </div>
-        <form>
+        <form action="/doReg">
             <fieldset>
                 <legend>员工信息</legend>
+                <div style="color: #ff0114" ${error!''}</div>
                 <table class="formtable" style="width:50%">
                     <tr>
                         <td>姓名：</td>
                         <td>
-                            <input type="text" id="employeename" maxlength="20"/>
+                            <input name="employeename" type="text"
+                                   value="<#if employee??>#{employee.employeename}</#if>" id="employeename"
+                                   maxlength="20"/>
                         </td>
                     </tr>
                     <tr>
                         <td>账户名：</td>
                         <td>
-                            <input type="text" id="accountname" maxlength="20"/>
+                            <input name="username" type="text" value="<#if employee??>#{employee.username}</#if>"
+                                   id="username" maxlength="20"/>
                         </td>
                     </tr>
                     <tr>
                         <td>密码：</td>
                         <td>
-                            <input type="password" id="password" maxlength="20" placeholder="请输入6位以上的密码"/>
+                            <input name="password" type="password" id="password" maxlength="20" placeholder="请输入6位以上的密码"/>
                         </td>
                     </tr>
                     <tr>
                         <td>确认密码：</td>
                         <td>
-                            <input type="password" id="confirm" maxlength="20"/>
+                            <input type="password" id="confirm" maxlength="20" onchange="check()"/>
+                            <div style="color: #ff0114" id="confirmInfo"></div>
                         </td>
                     </tr>
                     <tr>
                         <td>联系电话：</td>
                         <td>
-                            <input type="text" id="phone" maxlength="20"/>
+                            <input name="phone" type="text" value="<#if employee??>#{employee.phone}</#if>" id="phone"
+                                   maxlength="20"/>
                         </td>
                     </tr>
                     <tr>
                         <td>电子邮件：</td>
                         <td>
-                            <input type="text" id="email" maxlength="20"/>
+                            <input name="email" type="text" value="<#if employee??>#{employee.email}</#if>" id="email"
+                                   maxlength="20"/>
                         </td>
                     </tr>
                     <td>所在部门：</td>
                     <td>
-                        <select name="deptid">
-                            <option value="1">技术部</option>
-                            <option value="2">财务部</option>
-                            <option value="3">人事部</option>
+                        <select name="departmentid">
+                            <#if deps??>
+                                <#list deps as dep>
+                                    <option value="${dep.departmentid}">${dep.departmentname}</option>
+                                </#list>
+                            </#if>
                         </select>
                     </td>
                     </tr>
                     <tr>
                         <td colspan="6" class="command">
-                            <input type="button" class="clickbutton" value="注册"/>
+                            <input type="submit" class="clickbutton" value="注册"/>
                             <input type="reset" class="clickbutton" value="重置"/>
                         </td>
                     </tr>
@@ -83,5 +92,18 @@
     更多问题，欢迎联系<a href="mailto:webmaster@eeg.com">管理员</a>
     <img src="images/footer.png" alt="CoolMeeting"/>
 </div>
+<script>
+    // 检测两次输入密码是否一致
+    function check() {
+        var password = document.getElementById('password');
+        var confirm = document.getElementById('confirm');
+        var confirmInfo = document.getElementById('confirmInfo');
+        if (password.value !== confirm.value) {
+            confirmInfo.innerHTML = '两次输入密码不一致';
+        } else {
+            confirmInfo.innerHTML = '两次输入密码一致';
+        }
+    }
+</script>
 </body>
 </html>

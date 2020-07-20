@@ -1,7 +1,7 @@
 <!-- 头部显示用户名 -->
 <div class="page-header">
     <div class="header-banner">
-        <img src="images/header.png" alt="CoolMeeting"/>
+        <img src="/images/header.png" alt="CoolMeeting"/>
     </div>
     <div class="header-title">
         欢迎访问Cool-Meeting会议管理系统

@@ -24,6 +24,18 @@
     <!-- 配置静态资源文件 -->
     <mvc:resources mapping="/**" location="/"/>
 
+    <!-- 拦截器配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截路径 -->
+            <mvc:mapping path="/**"/>
+            <!-- 排除路径, 没必要被拦截 -->
+            <mvc:exclude-mapping path="/images/**"/>
+            <mvc:exclude-mapping path="/styles/**"/>
+            <bean class="com.freeziyou.meeting.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>

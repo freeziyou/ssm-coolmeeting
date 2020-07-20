@@ -4,7 +4,9 @@ import com.freeziyou.meeting.mapper.DepartmentMapper;
 import com.freeziyou.meeting.model.Department;
 import com.freeziyou.meeting.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,15 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 7/18/2020 20:12
  * @description TODO
  */
-@RestController
+@Controller
+@RequestMapping("/admin")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
-    @GetMapping("/dep")
+    @RequestMapping("/departments")
     public String getDepById(Integer id) {
-        Department dep = departmentService.getDepById(id);
-        System.out.println("dep = " + dep);
-        return "dep = " + dep;
+        return "departments";
     }
 }

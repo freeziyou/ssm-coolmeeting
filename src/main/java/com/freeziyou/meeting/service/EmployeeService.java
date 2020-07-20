@@ -23,4 +23,16 @@ public class EmployeeService {
         }
         return employee;
     }
+
+    public Integer doReg(Employee employee) {
+        // 验证用户名是否重复
+        Employee emp = employeeMapper.loadEmpByUsername(employee.getUsername());
+        if (emp != null) {
+            return -1;
+        }
+        // 初始化用户信息
+        employee.setRole(1);
+        employee.setStatus(0);
+        return employeeMapper.doReg(employee);
+    }
 }
