@@ -24,42 +24,24 @@
                 <th>当前状态</th>
                 <th>操作</th>
             </tr>
-            <tr>
-                <td>101</td>
-                <td>第一会议室</td>
-                <td>10</td>
-                <td>启用</td>
-                <td>
-                    <a class="clickbutton" href="roomdetails.ftl">查看详情</a>
-                </td>
-            </tr>
-            <tr>
-                <td>102</td>
-                <td>第二会议室</td>
-                <td>15</td>
-                <td>启用</td>
-                <td>
-                    <a class="clickbutton" href="roomdetails.ftl">查看详情</a>
-                </td>
-            </tr>
-            <tr>
-                <td>103</td>
-                <td>综合会议室</td>
-                <td>40</td>
-                <td>停用</td>
-                <td>
-                    <a class="clickbutton" href="roomdetails.ftl">查看详情</a>
-                </td>
-            </tr>
-            <tr>
-                <td>213</td>
-                <td>Mini会议室1</td>
-                <td>5</td>
-                <td>删除</td>
-                <td>
-                    <a class="clickbutton" href="roomdetails.ftl">查看详情</a>
-                </td>
-            </tr>
+            <#if mrs??>
+                <#list mrs as rm>
+                    <tr>
+                        <td>${rm.roomnum}</td>
+                        <td>${rm.roomname}</td>
+                        <td>${rm.capacity}</td>
+                        <#if rm.status == 0>
+                            <td>启用</td>
+                        <#else >
+                            <td>已占用</td>
+                        </#if>
+                        <#--                        <td>${(rm.status==0)? String('启用', '已占用')}</td>-->
+                        <td>
+                            <a class="clickbutton" href="/roomdetails?roomid=${rm.roomid}">查看详情</a>
+                        </td>
+                    </tr>
+                </#list>
+            </#if>
         </table>
     </div>
 </div>

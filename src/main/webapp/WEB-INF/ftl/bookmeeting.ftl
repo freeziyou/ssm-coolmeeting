@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>CoolMeeting会议管理系统</title>
     <link rel="stylesheet" href="/styles/common.css"/>
     <style type="text/css">
@@ -72,12 +73,16 @@
             selEmployees = document.getElementById("selEmployees");
             selSelectedEmployees = document.getElementById("selSelectedEmployees");
 
-            for (var i = 0; i < data.length; i++) {
-                var dep = document.createElement("option");
-                dep.value = data[i].departmentid;
-                dep.text = data[i].departmentname;
-                selDepartments.appendChild(dep);
-            }
+            $.get("/alldeps", function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var dep = document.createElement("option");
+                    dep.value = item.departmentid;
+                    dep.text = item.departmentname;
+                    selDepartments.appendChild(dep);
+                }
+                fillEmployees();
+            })
 
             fillEmployees();
         }
@@ -85,19 +90,14 @@
         function fillEmployees() {
             clearList(selEmployees);
             var departmentid = selDepartments.options[selDepartments.selectedIndex].value;
-            var employees;
-            for (var i = 0; i < data.length; i++) {
-                if (departmentid == data[i].departmentid) {
-                    employees = data[i].employees;
-                    break;
+            $.get("/getempbydepid?depId=" + departmentid, function (data) {
+                for (i = 0; i < data.length; i++) {
+                    var emp = document.createElement("option");
+                    emp.value = data[i].employeeid;
+                    emp.text = data[i].employeename;
+                    selEmployees.appendChild(emp);
                 }
-            }
-            for (i = 0; i < employees.length; i++) {
-                var emp = document.createElement("option");
-                emp.value = employees[i].employeeid;
-                emp.text = employees[i].employeename;
-                selEmployees.appendChild(emp);
-            }
+            })
         }
 
         function clearList(list) {
@@ -144,8 +144,9 @@
             var opt = document.createElement("option");
             opt.value = optEmployee.value;
             opt.text = optEmployee.text;
+            opt.selected = true;
 
-            if (insertIndex == -1) {
+            if (insertIndex === -1) {
                 selSelectedEmployees.appendChild(opt);
             } else {
                 selSelectedEmployees.insertBefore(opt, options[insertIndex]);
@@ -198,9 +199,9 @@
                         <td>会议室名称：</td>
                         <td>
                             <select name="roomid">
-                                <option value="1">第一会议室</option>
-                                <option value="2">第二会议室</option>
-                                <option value="3">第三会议室</option>
+                                <#list mrs as mr>
+                                    <option value="${mr.roomid}">${mr.roomname}</option>
+                                </#list>
                             </select>
                         </td>
                     </tr>

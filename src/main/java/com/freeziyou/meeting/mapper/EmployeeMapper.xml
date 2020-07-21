@@ -41,10 +41,17 @@
         from employee
         where status=#{status}
         <if test="employeename != null">
-            and employeename like concat('%', #{employeename}, '%')        </if>
+            and employeename like concat('%', #{employeename}, '%')
+        </if>
         <if test="username != null">
             and username like concat('%', #{username}, '%')
         </if>
+    </select>
+
+    <select id="getEmpByDepId" resultType="com.freeziyou.meeting.model.Employee">
+        select *
+        from employee
+        where departmentid = #{depId};
     </select>
 
 </mapper>
