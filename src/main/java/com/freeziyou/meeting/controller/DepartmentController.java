@@ -5,9 +5,9 @@ import com.freeziyou.meeting.model.Department;
 import com.freeziyou.meeting.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author Dylan Guo
@@ -21,7 +21,30 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     @RequestMapping("/departments")
-    public String getDepById(Integer id) {
+    public String departments(Model model) {
+        model.addAttribute("deps", departmentService.getAllDeps());
         return "departments";
+    }
+
+    @RequestMapping("/newdepartments")
+    public String addNewDepartment(String departmentname) {
+        Integer department = departmentService.addNewDepartment(departmentname);
+        return "redirect:/admin/departments";
+    }
+
+    @RequestMapping("/deletedepartment")
+    public String deletedepartment(Integer departmentid) {
+        Integer department = departmentService.deletedepartment(departmentid);
+        return "redirect:/admin/departments";
+    }
+
+    @RequestMapping("/updatedep")
+    @ResponseBody
+    public String updatedep(Integer id, String name) {
+        Integer result = departmentService.updatedep(id, name);
+        if (result == 1) {
+            return "success";
+        }
+        return "error";
     }
 }

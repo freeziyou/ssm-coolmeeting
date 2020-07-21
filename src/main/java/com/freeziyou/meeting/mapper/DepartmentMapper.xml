@@ -5,8 +5,25 @@
     <select id="getDepById" resultType="com.freeziyou.meeting.model.Department">
         select * from department where departmentid=#{id};
     </select>
-    
+
     <select id="getAllDeps" resultType="com.freeziyou.meeting.model.Department">
         select * from department;
     </select>
+
+    <insert id="addNewDepartment" parameterType="java.lang.String">
+        insert into department (departmentname) values (#{departmentname});
+    </insert>
+
+    <select id="getDepByName" resultType="com.freeziyou.meeting.model.Department">
+        select * from department where departmentname=#{departmentname};
+    </select>
+
+    <delete id="deletedepartment">
+        delete from department where departmentid=#{departmentid};
+    </delete>
+
+    <update id="updatedep">
+        update department set departmentname=#{name} where departmentid=#{id};
+    </update>
+
 </mapper>

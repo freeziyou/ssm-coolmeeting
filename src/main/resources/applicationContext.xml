@@ -30,6 +30,7 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean"/>
         <property name="basePackage" value="com.freeziyou.meeting.mapper"/>
     </bean>
+   
 
     <!-- 事务配置 -->
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">

@@ -6,7 +6,7 @@ package com.freeziyou.meeting.model;
  * @description TODO
  */
 public class Employee {
-    private Integer employee;
+    private Integer employeeid;
     private String employeename;
     private String username;
     private String password;
@@ -19,7 +19,7 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "employee=" + employee +
+                "employeeid=" + employeeid +
                 ", employeename='" + employeename + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
@@ -31,12 +31,12 @@ public class Employee {
                 '}';
     }
 
-    public Integer getEmployee() {
-        return employee;
+    public Integer getEmployeeid() {
+        return employeeid;
     }
 
-    public void setEmployee(Integer employee) {
-        this.employee = employee;
+    public void setEmployeeid(Integer employeeid) {
+        this.employeeid = employeeid;
     }
 
     public String getEmployeename() {

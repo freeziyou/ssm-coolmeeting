@@ -5,6 +5,8 @@ import com.freeziyou.meeting.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author Dylan Guo
  * @date 7/19/2020 21:18
@@ -34,5 +36,13 @@ public class EmployeeService {
         employee.setRole(1);
         employee.setStatus(0);
         return employeeMapper.doReg(employee);
+    }
+
+    public List<Employee> getAllEmpsByStatus(Integer status) {
+        return employeeMapper.getAllEmpsByStatus(status);
+    }
+
+    public Integer updatestatus(Integer employeeid, Integer status) {
+        return employeeMapper.updatestatus(employeeid, status);
     }
 }
